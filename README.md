@@ -1,0 +1,1 @@
+I am writing a library of functions in a common lisp and a parallel one in python (see https://github.com/sergey-rukavishnikov/PyAlgorithms.git )
