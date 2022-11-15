@@ -1,4 +1,5 @@
 (defpackage :malg
   (:use :cl)
   (:export :insertion-sort
-           :my-merge))
+           :my-merge
+           :merge-sort))

@@ -3,14 +3,14 @@
 (defun insertion-sort (A &optional comp-foo)
   (if (not comp-foo) (setf comp-foo #'>))
   (defun  while (i key)
-    (if (and (>= i 0) (funcall comp-foo (aref A i) key))
-        (progn (setf (aref A (+ i 1)) (aref A i))
+    (if (and (>= i 0) (funcall comp-foo (elt A i) key))
+        (progn (setf (elt A (+ i 1)) (elt A i))
                (while (- i 1) key)) (+ i 1)))
   (loop for j from 1 to (- (length A) 1) do
         (let
-            ((key (aref A j))
+            ((key (elt A j))
              (i (- j 1)))
-          (setf (aref A (while i key)) key))))
+          (setf (elt A (while i key)) key))))
 
 (defun my-merge (arr1 arr2 &optional destination comp-foo)
   (let ((i 0) (j 0) (len1 (length arr1)) (len2 (length arr2)) (k 0) (len-dest (+ (length arr1) (length arr2))))
@@ -28,3 +28,10 @@
         (loop for k from k  to (- len-dest 1) do
               (setf (elt destination k) (elt arr1 i)) (incf i)))
     (return-from my-merge destination)))
+
+(defun merge-sort (arr)
+  (if (> (length arr) 1)
+      (let ((mid (floor (/ (length arr) 2))))
+        (merge-sort (subseq arr 0  mid))
+        (merge-sort (subseq arr mid))
+        (setf arr (my-merge (subseq arr 0 (+ mid 1)) (subseq arr (+ mid 1)))))))
