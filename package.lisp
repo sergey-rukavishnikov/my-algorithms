@@ -2,4 +2,6 @@
   (:use :cl)
   (:export :insertion-sort
            :my-merge
-           :merge-sort))
+           :merge-sort
+           :random-from-range
+           :randomize-in-place))
