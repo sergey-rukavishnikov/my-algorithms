@@ -4,4 +4,5 @@
            :my-merge
            :merge-sort
            :random-from-range
-           :randomize-in-place))
+           :randomize-in-place
+           :bin-search))

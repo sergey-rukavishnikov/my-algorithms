@@ -47,3 +47,17 @@
     (loop for i from 0 to n do
           (rotatef (elt arr i) (elt arr (random-from-range i n))))
     (return-from randomize-in-place arr)))
+
+(defun bin-search (arr search-el)
+  (let ((bot 0) (top (- (length arr) 1)))
+    (if (or (> (elt arr bot) search-el) (< (elt arr top) search-el))
+        (return-from bin-search NIL)
+        (let  ((mid (floor (/ (+ bot top) 2))))
+          (loop while (and (/= (elt arr mid) search-el) (> top bot)) do
+                (if (> (elt arr mid) search-el)
+                    (progn (setf top mid) (setf mid (floor (/ (+ bot top) 2))))
+                    (progn (setf bot mid) (setf mid (ceiling (/ (+ bot top) 2))))))
+          (return-from bin-search
+            (if (= (elt arr mid) search-el)
+                mid
+                NIL))))))
