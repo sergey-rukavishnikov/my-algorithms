@@ -1,5 +1,7 @@
 (in-package :malg)
 
+(defconstant e 2.71828182845904523536028747135266249775724709369995)
+
 (defun insertion-sort (arr &optional comp-foo)
   (if (not comp-foo) (setf comp-foo #'>))
   (defun  while (i key)
@@ -61,3 +63,14 @@
             (if (= (elt arr mid) search-el)
                 mid
                 NIL))))))
+
+(defun on-line-maximum (array)
+  (let ((n (length array)) (k (ceiling (/ (- (length array) 1) e)))
+        (maximum (elt array (random-from-range 0 (- (ceiling (/ (- (length array) 1) e)) 1)))))
+    (loop for i from 0 to (- k 1) do
+          (if (> (elt array i) maximum)
+              (setf maximum (elt array i))))
+    (loop for i from k to (- n 1) do
+          (if (> (elt array i) maximum)
+              (return-from on-line-maximum i)))
+    (return-from on-line-maximum (- n 1))))
